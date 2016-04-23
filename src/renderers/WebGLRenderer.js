@@ -31,9 +31,6 @@ THREE.WebGLRenderer = function ( parameters ) {
 
 	var morphInfluences = new Float32Array( 8 );
 
-	var sprites = [];
-	var lensFlares = [];
-
 	// public properties
 
 	this.domElement = _canvas;
@@ -335,8 +332,7 @@ THREE.WebGLRenderer = function ( parameters ) {
 
 	// Plugins
 
-	var spritePlugin = new THREE.SpritePlugin( this, sprites );
-	var lensFlarePlugin = new THREE.LensFlarePlugin( this, lensFlares );
+	//removed
 
 	// API
 
@@ -1211,9 +1207,6 @@ THREE.WebGLRenderer = function ( parameters ) {
 		opaqueObjectsLastIndex = - 1;
 		transparentObjectsLastIndex = - 1;
 
-		sprites.length = 0;
-		lensFlares.length = 0;
-
 		setupGlobalClippingPlanes( this.clippingPlanes, camera );
 
 		projectObject( scene, camera );
@@ -1296,8 +1289,7 @@ THREE.WebGLRenderer = function ( parameters ) {
 
 		// custom render plugins (post pass)
 
-		spritePlugin.render( scene, camera );
-		lensFlarePlugin.render( scene, camera, _currentViewport );
+		// removed
 
 		// Generate mipmap if we're using any kind of mipmap filtering
 
@@ -1414,18 +1406,6 @@ THREE.WebGLRenderer = function ( parameters ) {
 			if ( object instanceof THREE.Light ) {
 
 				lights.push( object );
-
-			} else if ( object instanceof THREE.Sprite ) {
-
-				if ( object.frustumCulled === false || isObjectViewable( object ) === true ) {
-
-					sprites.push( object );
-
-				}
-
-			} else if ( object instanceof THREE.LensFlare ) {
-
-				lensFlares.push( object );
 
 			} else if ( object instanceof THREE.ImmediateRenderObject ) {
 
